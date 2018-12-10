@@ -7,6 +7,8 @@ import lombok.Getter;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Game.GameType;
 import net.md_5.bungee.config.Configuration;
 import net.simplyrin.config.Config;
 import net.simplyrin.discord.dropbot.listener.MessageListener;
@@ -77,6 +79,7 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		this.jda.getPresence().setGame(Game.of(GameType.DEFAULT, "Usage: !drop <erangel,miramar,sanhok,vikendi>"));
 	}
 
 }

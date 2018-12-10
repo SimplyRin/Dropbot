@@ -40,32 +40,32 @@ public class MessageListener extends ListenerAdapter {
 	 */
 	private String[] erangelDropSpots = {"Rozhok", "School", "Apartments", "Yasnaya Polyana", "Severny", "Shooting Range", "Mansion", "Prison", "Mylta", "Mylta Power", "Novolepnoye", "Military", "Ferry Pier", "Primorsk", "Hospital", "Georgopol Crates", "Georgopol South", "Georgopol North", "Zharki", "Stalber", "Kameshki", "Pochinki", "Ruins", "Water Town", "Farm"};
 	private String[] miramarDropSpots = {"Pecado", "San Martin", "Hacienda del Patron", "Minas Generales", "Monte Nuevo", "Chumacera", "Los Leones", "Puerto Paraiso", "Impala", "El Azahar", "Cruz del Valle", "La Cobreria", "El Pozo", "Valle del Mar", "Prison", "Los Higos", "Power Grid", "Water Treatment", "Torre Ahumada", "Campo Militar", "La Bendita", "East Islands"};
-
 	private String[] sanhokDropSpots = {"Khao", "Mongnal", "Tat Mok", "Ha Tinh", "Paradise Resort", "Camp Bravo", "Camp Alpha", "Bootcamp", "Bhan", "Lakawi", "Ruins", "Pai Nan", "Quarry", "Kampong", "Cave", "Tambang", "Na Kham", "Camp Charlie", "Sahmee", "Ban Tai", "Docks"};
+	private String[] vikendiDropSpots = {"Port", "Zabava", "Cosmodrome", "Trevno", "Krichas", "Coal Mine", "Dobro Mesto", "Groka", "Mount Kreznic", "Peshkova", "Podvosto", "Villa", "Vihar", "Movatra", "Dino Park", "Sawmill", "Abbey", "Tovar", "Castel", "Volnova", "Pilnee", "Winery", "Cantra", "Hot Springs", "Cament Factory", "Lumber Yard", "Milnar"};
 
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 		MessageChannel sender = event.getChannel();
 		String[] args = event.getMessage().getContentRaw().split(" ");
 
-		if(args.length > 0) {
-			if(!args[0].equalsIgnoreCase("!drop")) {
+		if (args.length > 0) {
+			if (!args[0].equalsIgnoreCase("!drop")) {
 				return;
 			}
 
-			if(args.length > 1) {
+			if (args.length > 1) {
 				/**
 				 * For admin
 				 */
-				if(event.getAuthor().getId().equals("224428706209202177")) {
-					if(args[1].equalsIgnoreCase("shutdown")) {
+				if (event.getAuthor().getId().equals("224428706209202177")) {
+					if (args[1].equalsIgnoreCase("shutdown")) {
 						sender.sendMessage("Shutting down...").complete();
 						this.instance.getJda().shutdown();
 						System.exit(0);
 						return;
 					}
 
-					if(args[1].equalsIgnoreCase("reboot")) {
+					if (args[1].equalsIgnoreCase("reboot")) {
 						sender.sendMessage("Restarting...").complete();
 						this.instance.getJda().shutdown();
 						this.instance.run();
@@ -76,7 +76,7 @@ public class MessageListener extends ListenerAdapter {
 				/**
 				 * Erangel
 				 */
-				if(args[1].equalsIgnoreCase("erangel") || args[1].equalsIgnoreCase("island") || args[1].equalsIgnoreCase("e") || args[1].equalsIgnoreCase("i")) {
+				if (args[1].equalsIgnoreCase("erangel") || args[1].equalsIgnoreCase("island") || args[1].equalsIgnoreCase("e") || args[1].equalsIgnoreCase("i")) {
 					List<String> list = Arrays.asList(this.erangelDropSpots);
 					Collections.shuffle(list);
 					String result = list.get(0);
@@ -88,7 +88,7 @@ public class MessageListener extends ListenerAdapter {
 				/**
 				 * Miramar
 				 */
-				if(args[1].equalsIgnoreCase("miramar") || args[1].equalsIgnoreCase("desert") || args[1].equalsIgnoreCase("m") || args[1].equalsIgnoreCase("d")) {
+				if (args[1].equalsIgnoreCase("miramar") || args[1].equalsIgnoreCase("desert") || args[1].equalsIgnoreCase("m") || args[1].equalsIgnoreCase("d")) {
 					List<String> list = Arrays.asList(this.miramarDropSpots);
 					Collections.shuffle(list);
 					String result = list.get(0);
@@ -100,7 +100,7 @@ public class MessageListener extends ListenerAdapter {
 				/**
 				 * Sanhok
 				 */
-				if(args[1].equalsIgnoreCase("sanhok") || args[1].equalsIgnoreCase("s") || args[1].equalsIgnoreCase("savage")) {
+				if (args[1].equalsIgnoreCase("sanhok") || args[1].equalsIgnoreCase("s") || args[1].equalsIgnoreCase("savage")) {
 					List<String> list = Arrays.asList(this.sanhokDropSpots);
 					Collections.shuffle(list);
 					String result = list.get(0);
@@ -108,9 +108,21 @@ public class MessageListener extends ListenerAdapter {
 					sender.sendMessage("[Sanhok] Drop Spot: **" + result + "**").complete();
 					return;
 				}
+
+				/**
+				 * Vikendi
+				 */
+				if (args[1].equalsIgnoreCase("vikendi") || args[1].equalsIgnoreCase("v")) {
+					List<String> list = Arrays.asList(this.vikendiDropSpots);
+					Collections.shuffle(list);
+					String result = list.get(0);
+
+					sender.sendMessage("[Vikendi] Drop Spot: **" + result + "**").complete();
+					return;
+				}
 			}
 
-			sender.sendMessage("Usage: !drop <erangel,miramar,sanhok>").complete();
+			sender.sendMessage("Usage: !drop <erangel,miramar,sanhok,vikendi>").complete();
 			return;
 		}
 	}
